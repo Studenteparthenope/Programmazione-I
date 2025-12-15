@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+	<head>
+		<title>Codice dizionario</title>
+	</head>
+	<body>
+	<center><h1>Codice aprogetto Dizionario della lingua italiana</h1></center>
+<p>#include <stdio.h>  //contiene definizioni di macro, costanti e dichiarazioni di funzioni e tipi usati per le varie operazioni di input/output.<br>
+#include <stdlib.h>   //allocazione della memoria, controllo dei processi, e altre funzioni generali comprendenti anche i tipi di dato.<br>
+#include <string.h>   //contiene definizioni di macro, costanti e dichiarazioni di funzioni e tipi usati non solo nella manipolazione delle stringhe ma anche nella manipolazione della memoria.<br>
+#include <windows.h>  //contiene le dichiarazioni in C/C++ per le funzioni delle Windows API.<br>
+
+typedef struct{     //creazione della struct con i campi parola,significato,e sinonimi<br>
+char parola [100];  <br>
+char significato[100];<br>
+char *sinonimi[5];<br>
+}Parola;<br>
+
+//Prototipi<br>
+
+void opzioni();<br>
+void visualizza_significato(char *);<br>
+void creazione_dizionario();<br>
+Parola Dizionario[20];<br>
+int parole_dizionario=5;<br>
+//main del programma<br>
+int main(){<br>
+    creazione_dizionario();<br>
+    ordinamento();<br>
+    opzioni();<br>
+    return 0;<br>
+}<br>
+//function per la scelta nel menù principale<br>
+void opzioni(){<br>
+        char scelta;<br>
+        char parola[30];<br>
+        while(1){<br>
+            printf("[1]Inserire parola\n");<br>
+            printf("[2]Visualizza il significato\n");<br>
+            printf("[3]Exit");<br>
+            printf("\n");<br>
+            scelta = getch();<br>
+                switch(scelta){<br>
+                    case '1':<br>
+                        Inserimento_parola();<br>
+                        break;<br>
+                    case '2':<br>
+        printf("\nInserisci la parola da ricercare: ");<br>
+                scanf("%s",&parola);<br>
+                fflush(stdin);<br>
+                    visualizza_significato(parola);<br>
+                printf("\n");<br>
+                system("pause");<br>
+                break;<br>
+        }<br>
+                if(scelta == '3')<br>
+                    break;<br>
+                system("cls");<br>
+    }<br>
+}<br>
+//function per la visualizzazione del significato delle parole presenti nel dizionario<br>
+void visualizza_significato(char parola[]){<br>
+        int i;<br>
+        for(i=0;i&lt;parole_dizionario;i++){ //scorrimento del dizionario<br>
+            if(strcmp(Dizionario[i].parola,parola) == 0){  //verifica di uguaglianza<br>
+        printf("\n%s",Dizionario[i].significato);  //in caso di uguaglianza stampa del corrispondente significato<br>
+                return;<br>
+        }<br>
+    }<br>
+    printf("\nLa parola non si trova nel Dizionario!\n");  //stampa in causa di mancata uguaglianza<br>
+}<br>
+//function per inserimento delle parole nel dizionario<br>
+void Inserimento_parola(){<br>
+    char parola[100];<br>
+    char significato[100];<br>
+    printf("\nDigita la parola da inserire: ");<br>
+    gets(parola);<br>
+    fflush(stdin);<br>
+    printf("\nInserire il suo significato: ");<br>
+    gets(significato);<br>
+    fflush(stdin);<br>
+    strcpy(Dizionario[parole_dizionario].parola,parola);<br>
+    strcpy(Dizionario[parole_dizionario].significato,significato);<br>
+    parole_dizionario++;<br>
+    ordinamento();<br>
+}<br>
+//function per l'ordinamento delle parole del dizioanrio<br>
+void ordinamento(){<br>
+    int i,j;<br>
+    Parola el_da_ins;<br>
+for(i=1;i&lt;parole_dizionario;i++){<br>
+    el_da_ins=Dizionario[i];<br>
+    j=i-1;<br>
+while(j>0 && strcmp(el_da_ins.parola,Dizionario[j].parola)<0){<br>
+    Dizionario[j+1]=Dizionario[j];<br>
+    j--;<br>
+  }<br>
+    Dizionario[j+1]=el_da_ins;<br>
+  }<br>
+}<br>
+//function per la creazione del dizionario,usufruendo della struct Parola<br>
+
+void creazione_dizionario(){<br>
+strcpy(Dizionario[0].parola,"vedere");<br>
+strcpy(Dizionario[0].significato,"Percepire con gli occhi, cogliere con la facoltà della vista");<br>
+Dizionario[0].sinonimi[0]="Osservare";<br>
+Dizionario[0].sinonimi[1]="Guardare";<br>
+Dizionario[0].sinonimi[2]="Percepire";<br>
+Dizionario[0].sinonimi[3]="Scorgere";<br>
+Dizionario[0].sinonimi[4]="Scrutare";<br>
+<br>
+strcpy(Dizionario[1].parola,"ascoltare");<br>
+strcpy(Dizionario[1].significato,"Udire attentamente qualcuno,accogliere come consiglio, ammonimento o direttiva morale.");<br>
+Dizionario[1].sinonimi[0]="Origliare";<br>
+Dizionario[1].sinonimi[1]="Usciolare";<br>
+Dizionario[1].sinonimi[2]="Auscultare";<br>
+Dizionario[1].sinonimi[3]="Sentire";<br>
+Dizionario[1].sinonimi[4]="Assistere";<br>
+<br>
+strcpy(Dizionario[2].parola,"giocare");<br>
+strcpy(Dizionario[2].significato,"Dedicarsi a un gioco per ricreazione o passatempo");<br>
+Dizionario[2].sinonimi[0]="Distrarsi";<br>
+Dizionario[2].sinonimi[1]="Divertirsi";<br>
+Dizionario[2].sinonimi[2]="Giochicchiare";<br>
+Dizionario[2].sinonimi[3]="Giocherellare";<br>
+Dizionario[2].sinonimi[4]="Svagarsi";<br>
+<br>
+strcpy(Dizionario[3].parola,"camminare");<br>
+strcpy(Dizionario[3].significato,"Spostarsi, procedere andando a piedi");<br>
+Dizionario[3].sinonimi[0]="Procedere";<br>
+Dizionario[3].sinonimi[1]="Dirigersi";<br>
+Dizionario[3].sinonimi[2]="Andare";<br>
+Dizionario[3].sinonimi[3]="Avviarsi";<br>
+Dizionario[3].sinonimi[4]="Avanzare";<br>
+<br>
+strcpy(Dizionario[4].parola,"lanciare");<br>
+strcpy(Dizionario[4].significato,"Gettare con forza e lontano.");<br>
+Dizionario[4].sinonimi[0]="Buttare";<br>
+Dizionario[4].sinonimi[1]="Gettare";<br>
+Dizionario[4].sinonimi[2]="Scagliare";<br>
+Dizionario[4].sinonimi[3]="Scaraventare";<br>
+Dizionario[4].sinonimi[4]="Tirare";<br>
+}<br></p>
+<center><a href="Progetto_dizionario.html">Torna alla relazione</a></center>
+<center><a href="../Index.html">Torna alla home</a></center>

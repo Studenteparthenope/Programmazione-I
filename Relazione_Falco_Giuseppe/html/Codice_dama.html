@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+	<head>
+		<title>Codice Dama</title>
+	</head>
+	<body>
+	<center><h1>Codice progetto gioco della dama</h1></center>
+<p>#include <stdio.h>  //contiene definizioni di macro, costanti e dichiarazioni di funzioni e tipi usati per le varie operazioni di input/output.<br>
+#include <stdlib.h>  //allocazione della memoria, controllo dei processi, e altre funzioni generali comprendenti anche i tipi di dato.<br>
+#include <time.h>   //fornisce un accesso standardizzato alle funzioni di acquisizione e manipolazione del tempo.<br>
+
+#define RIGHE 8 //definiamo  la costante RIGHE uguale a 8<br>
+#define COLONNE 8  //definiamo  la costante COLONNE uguale a 8<br>
+char conversione_colonna(int);  //prototipo  funzione per la coversione da numeri a lettere delle colonne<br>
+//Creazione del campo da gioco<br>
+char Scacchiera [RIGHE][COLONNE]= {<br>{' ','X',' ','X',' ','X',' ','X'},<br>
+                                   {'X',' ','X',' ','X',' ','X',' '},<br>
+                                   {' ','X',' ','X',' ','X',' ','X'},<br>
+                                   {'X',' ','X',' ','X',' ','X',' '},<br>
+                                   {' ','X',' ','X',' ','X',' ','X'},<br>
+                                   {'X',' ','X',' ','X',' ','X',' '},<br>
+                                   {' ','X',' ','X',' ','X',' ','X'},<br>
+                                   {'X',' ','X',' ','X',' ','X',' '},<br>
+                                  };<br>
+//Visualizzazione del campo da gioco creato<br>
+void visualizza_scacchiera()<br>
+int i,j;<br>
+printf("  A B C D E F G H\n");<br>
+for(i=0;i&lt;RIGHE;i++){<br>
+    printf("%d ",i+1);<br>
+    for(j=0;j&lt;COLONNE;j++){<br>
+        printf("%c ",Scacchiera[i][j]);<br>
+    }<br>
+    printf("\n");<br>
+}<br>
+}<br>
+//Posizionamento del tipo randomico di tutte le pedine sul campo da gioco<br>
+void posizionamento_pedine(){<br>
+int i;<br>
+int rig_random,col_random;<br>
+for(i=0;i<5;i++){ //viene utilizzato il ciclo di ripetizione for, in modo che al passo i-esimo viene assegnata la posizione ad una pedina bianca<br>
+    do{<br>
+       rig_random = rand()%8;   //viene utilizzata la funzione rand,genera un numero randomico da 0 a 7, per quel che riguarda le righe<br>
+       col_random = rand()%8;   //viene utilizzata la funzione rand,genera un numero randomico da 0 a 7, per quel che riguarda le colonne<br>
+    }while(Scacchiera[rig_random][col_random]!='X');  //il ciclo finisce quando abbiamo come  valore X nella posizione random<br>
+    Scacchiera[rig_random][col_random]= 'B';//inserimento pedina bianca<br>
+}<br>
+for(i=0;i<5;i++){//viene utilizzato il ciclo di ripetizione for, in modo che al passo i-simo viene assegnata la posizione ad una pedina nera<br>
+    do{<br>
+       rig_random = rand()%8;  //viene utilizzata la funzione rand,genera un numero randomico da 0 a 7, per quel che riguarda le righe<br>
+       col_random = rand()%8;  //viene utilizzata la funzione rand,genera un numero randomico da 0 a 7, per quel che riguarda le colonne<br>
+    }while(Scacchiera[rig_random][col_random]!='X');  //il ciclo finisce quando abbiamo come  valore X nella posizione random
+    Scacchiera[rig_random][col_random]= 'N';//inserimento pedina nera<br>
+}<br>
+}<br>
+//Funzione principale in cui viene effettuato il calcolo riguardante le possibili pedine(sia nere che bianche)catturabili<br>
+void calcolo_pedine_catturabili(){<br>
+int i,j;<br>
+for(i=0;i&lt;RIGHE;i++){   //primo ciclo for che al passo i_simo scorre le righe<br>
+    for(j=0;j&lt;COLONNE;j++){  //secondo ciclo for che al passo j_esimo scorre le colonne<br>
+        if(Scacchiera[i][j]=='B'){<br>
+        trova_possibili_pedine_nere_catturabili(i,j);  //Quando il valore della  posizione data dagli indici [i][j] e' uguale a B richiama la funzione per il <br>calcolo delle pedine nere catturabili<br>
+        }<br>
+        if(Scacchiera[i][j]=='N'){<br>
+        trova_possibili_pedine_bianche_catturabili(i,j);  //Quando il valore della  posizione data dagli indici [i][j] e' uguale a B richiama la funzione per il calcolo delle pedine bianche catturabili<br>
+        }<br>
+    }<br>
+}<br>
+
+}<br>
+//Funzione calcolo pedine nere catturabili richiamata da funzione principale<br>
+void trova_possibili_pedine_nere_catturabili(int riga_bianca,int colonna_bianca){<br>
+if(riga_bianca>1){<br>
+        if(colonna_bianca==7||colonna_bianca==6){<br>
+            if(Scacchiera[riga_bianca-1][colonna_bianca-1]=='N'){<br>
+                if(Scacchiera[riga_bianca-2][colonna_bianca-2]=='X'){<br>
+                    printf("La pedina bianca che si trova in %c%d mangia la pedina nera che si trova in %c%d\n",conversione_colonna(<br>colonna_bianca),riga_bianca+1,conversione_colonna(colonna_bianca-1),riga_bianca);<br>
+                    return;<br>
+                }<br>
+            }<br>
+        }<br>
+        if(colonna_bianca==0||colonna_bianca==1){<br>
+            if(Scacchiera[riga_bianca-1][colonna_bianca+1]=='N'){<br>
+                if(Scacchiera[riga_bianca-2][colonna_bianca+2]=='X'){<br>
+                    printf("La pedina bianca che si trova in %c%d mangia la pedina nera che si trova in %c%d\n",conversione_colonna(<br>colonna_bianca),riga_bianca+1,conversione_colonna(colonna_bianca+1),riga_bianca);<br>
+                    return;<br>
+                }<br>
+            }<br>
+        }<br>
+        if(Scacchiera[riga_bianca-1][colonna_bianca-1]=='N'){<br>
+                if(Scacchiera[riga_bianca-2][colonna_bianca-2]=='X'){<br>
+                    printf("La pedina bianca che si trova in %c%d mangia la pedina nera che si trova in %c%d\n",conversione_colonna(<br>colonna_bianca),riga_bianca+1,conversione_colonna(colonna_bianca-1),riga_bianca);<br>
+                }<br>
+            }<br>
+        if(Scacchiera[riga_bianca-1][colonna_bianca+1]=='N'){<br>
+                if(Scacchiera[riga_bianca-2][colonna_bianca+2]=='X'){<br>
+                    printf("La pedina bianca che si trova in %c%d mangia la pedina nera che si trova in %c%d\n",conversione_colonna(<br>colonna_bianca),riga_bianca+1,conversione_colonna(colonna_bianca+1),riga_bianca);<br>
+                }<br>
+            }<br>
+}<br>
+}<br>
+//Funzione calcolo pedine bianche catturabili richiamata da funzione principale<br>
+void trova_possibili_pedine_bianche_catturabili(int riga_nera,int colonna_nera){<br>
+    if(riga_nera<7){<br>
+        if(colonna_nera==7||colonna_nera==6){<br>
+            if(Scacchiera[riga_nera+1][colonna_nera-1]=='B'){<br>
+                if(Scacchiera[riga_nera+2][colonna_nera-2]=='X'){<br>
+                    printf("La pedina nera che si trova in %c%d mangia la pedina bianca che si trova in %c%d\n",conversione_colonna(<br>colonna_nera),riga_nera+1,conversione_colonna(colonna_nera-1),riga_nera+2);<br>
+                    return;<br>
+                }<br>
+            }<br>
+        }<br>
+        if(colonna_nera==0||colonna_nera==1){<br>
+            if(Scacchiera[riga_nera+1][colonna_nera+1]=='B'){<br>
+                if(Scacchiera[riga_nera+2][colonna_nera+2]=='X'){<br>
+                    printf("La pedina nera che si trova in %c%d mangia la pedina bianca che si trova in %c%d\n",conversione_colonna(<br>colonna_nera),riga_nera+1,conversione_colonna(colonna_nera+1),riga_nera+2);<br>
+                    return;<br>
+                }<br>
+            }<br>
+        }<br>
+        if(Scacchiera[riga_nera+1][colonna_nera-1]=='B'){<br>
+                if(Scacchiera[riga_nera+2][colonna_nera-2]=='X'){<br>
+                    printf("La pedina nera che si trova in %c%d mangia la pedina bianca che si trova in %c%d\n",conversione_colonna(<br>colonna_nera),riga_nera+1,conversione_colonna(colonna_nera-1),riga_nera+2);<br>
+                }<br>
+            }<br>
+        if(Scacchiera[riga_nera+1][colonna_nera+1]=='B'){<br>
+                if(Scacchiera[riga_nera+2][colonna_nera+2]=='X'){<br>
+                    printf("La pedina nera che si trova in %c%d mangia la pedina bianca che si trova in %c%d\n",conversione_colonna(<br>colonna_nera),riga_nera+1,conversione_colonna(colonna_nera+1),riga_nera+2);<br>
+                }<br>
+            }<br>
+}<br>
+}<br>
+//Funzione per la conversione da numeri a lettere riguardante le colonne<br>
+char conversione_colonna(int colonna){<br>
+switch(colonna){<br>
+    case 0:<br>
+       return 'A';<br>
+    case 1:<br>
+       return 'B';<br>
+    case 2:<br>
+       return 'C';<br>
+    case 3:<br>
+       return 'D';<br>
+    case 4:<br>
+       return 'E';<br>
+    case 5:<br>
+       return 'F';<br>
+    case 6:<br>
+       return 'G';<br>
+    case 7:<br>
+       return 'H';<br>
+}<br>
+}<br>
+//main del programma<br>
+int main()<br>
+{<br>
+srand(time(NULL));<br>
+posizionamento_pedine();<br>
+visualizza_scacchiera();<br>
+calcolo_pedine_catturabili();<br>
+}</p><br>
+<center><a href="Progetto_gioco_dama.html">Torna alla relazione</a></center>
+<center><a href="../Index.html">Torna alla home</a></center>

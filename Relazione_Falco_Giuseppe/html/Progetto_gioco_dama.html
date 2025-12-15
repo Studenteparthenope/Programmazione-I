@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+	<head>
+		<title>Progetto Dama</title>
+	</head>
+	<body>
+	<center><h1>Relazione progetto gioco della dama</h1></center>
+	<center><p>Algoritmo legato al gioco della Dama. L’algoritmo considera una scacchiera regolamentare (8x8 caselle bianche e nere, casella nera in basso a sinistra) e dispone a caso (usando la function rand) 5 Pedine Bianche e 5 Pedine Nere (per semplicità, possono stare in una qualunque casella non occupata da un’altra pedina). Si ricorda che nel gioco della Dama le Pedine di qualunque colore possono occupare solo le caselle nere della scacchiera. L’algoritmo deve visualizzare la scacchiera, mostrando una ‘X’ per le caselle nere non occupate, mostrando uno spazio (blank) per le caselle bianche, mostrando una ‘B’ per le caselle occupate dalle Pedine Bianche, una ‘N’ per le caselle occupate dalle Pedine Nere. L’algoritmo determina, in base alla posizione di tutte le Pedine sulla scacchiera, quali sono le Pedine Nere che possono essere catturate dalle Pedine Bianche. Fare attenzione al fatto che una Pedina Bianca cattura una Pedine Nera solo se quest’ultima si trova in una delle due caselle nere vicine lungo le due diagonali che passano per la casella dove di trova la Pedina Bianca e se la successiva casella nera esiste ed è libera. Infine l’algoritmo visualizza l’elenco delle Pedine Nere catturabili, precisando anche da quale Pedina Bianca sono catturabili e utilizzando la notazione usuale delle posizioni nel gioco della Dama, ovvero scrivendo, per esempio: Pedina Nera in b2 catturabile da Pedina Bianca in a1, ….. Ricordare che nella notazione usuale le righe della scacchiera sono indicate mediante numeri interi (da 1 ad 8, dal basso verso l’alto), mentre le colonne sono indicate mediante lettere dell’alfabeto (da ‘a’ ad ‘h’ da sinistra a destra) e che la notazione prevede di indicare prima la lettera (colonna) e poi il numero (riga). Le Pedine possono catturare solo “in avanti” (dal basso verso l’alto, guardando la scacchiera), cioè le Pedine Bianche possono catturare muovendosi verso caselle nere contrassegnate da un indice maggiore di quello della casella nera dove di trova Pedina Bianca e che le Pedine Nere possono catturare muovendosi verso caselle nere contrassegnate da un indice minore di quello della casella nera dove di trova Pedina Nera (dall’alto verso il basso, guardando la scacchiera).</p></center>
+	<br>
+	<center><p>Di seguito le tre simulazioni del programma.
+In queste tre simulazioni il programma ha individuato le possibili pedine nere catturabili dalle pedine bianche (quest’ultime si muovevano dal basso verso l'alto)
+e naturalmente anche le pedine bianche catturabili dalle pedine nere (quest’ultime si muovevano dall'alto verso il basso)</p></center>
+<br/>
+<center><h3>Prima simulazione</h3></center>
+<center><img src="../images/Prima_simulazione_dama.jpg"></center>
+
+<center><p>In questa prima simulazione il programma ha individuato in maniera corretta le pedine bianche catturabili che si trovavano nelle seguenti posizioni:D3,D5,F7.<br>
+Contemporaneamente il programma ha individuato anche le pedine nere catturabili che si trovavano nelle seguenti posizioni:C2,C4,G4.
+</p></center>
+<br>
+<center><h3>Seconda simulazione</h3></center>
+<center><img src="../images/Seconda_simulazione_dama.jpg"></center>
+<center><p>In questa seconda simulazione il programma ha individuato in maniera corretta le pedine bianche catturabili, che in realtà in questo caso era una sola e si trovava nelle seguente posizione: F5.<br>
+Contemporaneamente il programma ha individuato anche le pedine nere catturabili che si trovavano nelle seguenti posizioni: E4,B7,D7,F7.
+<br>
+<center><h3>Terza simulazione</h3></center>
+<center><img src="../images/Terza_simulazione_dama.jpg"></center>
+<center><p>In questa terza simulazione il programma ha individuato in maniera corretta le pedine bianche catturabili che si trovavano nelle seguenti posizioni:E2,D5.<br>
+Contemporaneamente il programma ha individuato anche le pedine nere catturabili, che in realtà in questo caso era una sola e si trovava nelle seguente posizione: E4.
+
+<p>Di seguito il link per visualizzare il codice del programma:</p><a href="Codice_dama.html">codice dama
+
+	</body>
